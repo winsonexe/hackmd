@@ -1,5 +1,5 @@
 //common
-var domain = ''; // domain name
+var domain = 'localhost'; // domain name
 var urlpath = ''; // sub url path, like: www.example.com/<urlpath>
 //settings
 var debug = false;

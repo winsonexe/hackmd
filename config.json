@@ -2,12 +2,20 @@
     "development": {
         "domain": "localhost",
         "db": {
-            "username": "",
-            "password": "",
+            "username": "admin",
+            "password": "admin",
             "database": "hackmd",
             "host": "localhost",
             "port": "3306",
             "dialect": "mysql"
+        },
+        "facebook": {
+            "clientID": "455717244623963",
+            "clientSecret": "11de325d7d06f0f3cbe5b59ca6ccdefa"
+        },
+        "google": {
+            "clientID": "475756091592-qomveu858lm02pipdi239sre9qqn75pe.apps.googleusercontent.com",
+            "clientSecret": "-ZfD_m_5idy6nIZeff-JBys0"
         }
     },
     "production": {

@@ -16,3 +16,4 @@ backups/
 *.pid
 *.log
 *.sqlite
+.vscode

@@ -4,6 +4,9 @@
   "description": "Realtime collaborative markdown notes on all platforms.",
   "main": "app.js",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "dependencies": {
     "async": "^2.0.1",
     "blueimp-md5": "^2.3.0",
