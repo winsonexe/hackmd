@@ -664,6 +664,13 @@ var ui = {
         snippetImportProjects: $("#snippetImportModalProjects"),
         snippetImportSnippets: $("#snippetImportModalSnippets"),
         revision: $("#revisionModal")
+    },
+    mode: {
+        gannt: $(".ui-gannt"),
+        todoList: $(".ui-todoList"),
+        table: $(".ui-table"),
+        test: $(".ui-test"),
+        tree: $(".ui-tree")
     }
 };
 
@@ -931,7 +938,7 @@ function checkEditorStyle() {
             },
             stop: function (e) {
                 lastEditorWidth = ui.area.edit.width();
-                // workaround that scroll event bindings 
+                // workaround that scroll event bindings
                 preventSyncScrollToView = 2;
                 preventSyncScrollToEdit = true;
                 editor.setOption('viewportMargin', viewportMargin);
@@ -1163,12 +1170,12 @@ function changeMode(type) {
         preventSyncScrollToView = 2;
         syncScrollToEdit(null, true);
     }
-    
+
     if (lastMode == modeType.edit && currentMode == modeType.both) {
         preventSyncScrollToEdit = 2;
         syncScrollToView(null, true);
     }
-    
+
     if (lastMode == modeType.both && currentMode != modeType.both) {
         preventSyncScrollToView = false;
         preventSyncScrollToEdit = false;
@@ -1254,7 +1261,7 @@ if (GOOGLE_API_KEY && GOOGLE_CLIENT_ID) {
         .attr('type', 'text/javascript')
         .attr('src', 'https://www.google.com/jsapi')
         .appendTo('body');
-    
+
     $('<script>')
         .attr('type', 'text/javascript')
         .attr('src', 'https://apis.google.com/js/client:plusone.js?onload=onGoogleClientLoaded')
@@ -1409,6 +1416,48 @@ ui.toolbar.import.dropbox.click(function () {
     };
     Dropbox.choose(options);
 });
+
+ui.mode.gannt.click(function () {
+    var arrayData = [];
+    var title = ' A Gantt Diagram ';
+    arrayData.push('```mermaid \n gantt');
+    arrayData.push('title' + title + '\n\n');
+    //
+    var data = '\n```mermaid \ngantt \n title A Gantt Diagram \n section Section \n     A task           :a1, 2016-01-01, 30d \n     Another task     :after a1  , 20d \n     section Another \n     Task in sec      :2016-01-12  , 12d \n     anther task      : 24d \n ``` \n\n';
+    editor.replaceRange(data, {
+        line: editor.lastLine(),
+        ch: editor.lastLine()+1
+    });
+});
+
+ui.mode.todoList.click(function () {
+    var data = '\n- [ ] Todos \n  - [x] Buy some salad \n  - [ ] Brush teeth \n  - [x] Drink some water \n';
+    editor.replaceRange(data, {
+        line: editor.lastLine(),
+        ch: editor.lastLine()+1
+    });
+});
+
+ui.mode.table.click(function () {
+    var data = '\n| Option | Description | \n| ------ | ----------- | \n| data   | path to data files to supply the data that will be passed into templates. | \n| engine | engine to be used for processing templates. Handlebars is the default. | \n| ext    | extension to be used for dest files. | \n';
+    editor.replaceRange(data, {
+        line: editor.lastLine(),
+        ch: editor.lastLine()+1
+    });
+});
+
+ui.mode.tree.click(function () {
+    var data = '\n```graphviz \ndigraph hierarchy { \n    nodesep=1.0 // increases the separation between nodes \n\n node \n [color=Red,fontname=Courier,shape=box] //All nodes will this shape and colour \n edge [color=Blue, style=dashed] //All the lines look like this \n\n Headteacher->{Deputy1 Deputy2 BusinessManager} \n  Deputy1->{Teacher1 Teacher2} \n  BusinessManager->ITManager \n {rank=same;ITManager Teacher1 Teacher2}  } // Put them on the same level  \n ``` \n';
+    editor.replaceRange(data, {
+        line: editor.lastLine(),
+        ch: editor.lastLine()+1
+    });
+});
+
+ui.mode.test.click(function () {
+    editor.setValue('');
+});
+
 // import from google drive
 var picker = null;
 function buildImportFromGoogleDrive() {
@@ -1561,7 +1610,7 @@ function parseRevisions(_revisions) {
     }
 }
 function selectRevision(time) {
-    if (time == revisionTime) return; 
+    if (time == revisionTime) return;
     $.get(noteurl + '/revision/' + time)
         .done(function(data) {
             revision = JSON.parse(data);
@@ -3508,6 +3557,8 @@ function matchInContainer(text) {
     }
 }
 
+
+//拿到使用者輸入的文字，坐相對應的事情 jquery textcomplete
 $(editor.getInputField())
     .textcomplete([
         { // emoji strategy
