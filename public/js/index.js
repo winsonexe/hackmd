@@ -670,7 +670,8 @@ var ui = {
         todoList: $(".ui-todoList"),
         table: $(".ui-table"),
         test: $(".ui-test"),
-        tree: $(".ui-tree")
+        tree: $(".ui-tree"),
+        three: $(".ui-three")
     }
 };
 
@@ -1448,6 +1449,14 @@ ui.mode.table.click(function () {
 
 ui.mode.tree.click(function () {
     var data = '\n```graphviz \ndigraph hierarchy { \n    nodesep=1.0 // increases the separation between nodes \n\n node \n [color=Red,fontname=Courier,shape=box] //All nodes will this shape and colour \n edge [color=Blue, style=dashed] //All the lines look like this \n\n Headteacher->{Deputy1 Deputy2 BusinessManager} \n  Deputy1->{Teacher1 Teacher2} \n  BusinessManager->ITManager \n {rank=same;ITManager Teacher1 Teacher2}  } // Put them on the same level  \n ``` \n';
+    editor.replaceRange(data, {
+        line: editor.lastLine(),
+        ch: editor.lastLine()+1
+    });
+});
+
+ui.mode.three.click(function () {
+    var data = '\n# 三層結構筆記\n## 草稿區 \n\n\n\n\n\n\n------------------ \n ## 筆記區\n\n\n\n\n\n\n------------------ \n## 心得區   \n';
     editor.replaceRange(data, {
         line: editor.lastLine(),
         ch: editor.lastLine()+1
