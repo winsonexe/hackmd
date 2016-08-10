@@ -626,7 +626,16 @@ var ui = {
         edit: $(".ui-edit"),
         view: $(".ui-view"),
         both: $(".ui-both"),
-        uploadImage: $(".ui-upload-image")
+        uploadImage: $(".ui-upload-image"),
+        bold:$(".ui-bold"),
+        italic:$(".ui-italic"),
+        underline:$(".ui-underline"),
+        listul:$(".ui-listul"),
+        listol:$(".ui-listol"),
+        list:$(".ui-list"),
+        smile:$(".ui-smile"),
+        tag:$(".ui-tag"),
+        heade:$(".ui-header li a")
     },
     infobar: {
         lastchange: $(".ui-lastchange"),
@@ -1465,6 +1474,64 @@ ui.mode.three.click(function () {
 
 ui.mode.test.click(function () {
     editor.setValue('');
+});
+ui.toolbar.heade.click(function (){
+    var nowvalue="";
+    nowvalue=$(this).html();
+    if(nowvalue=="h1")
+        editor.replaceRange("# ", editor.getCursor());
+    if(nowvalue=="h2")
+        editor.replaceRange("## ", editor.getCursor());
+    if(nowvalue=="h3")
+        editor.replaceRange("### ", editor.getCursor());
+    if(nowvalue=="h4")
+        editor.replaceRange("#### ", editor.getCursor());
+    if(nowvalue=="h5")
+        editor.replaceRange("##### ", editor.getCursor());
+    if(nowvalue=="h6")
+        editor.replaceRange("####### ", editor.getCursor());
+
+
+});
+ui.toolbar.bold.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection("**"+nowvalue+"**");
+});
+ui.toolbar.italic.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection("*"+nowvalue+"*");
+});
+ui.toolbar.underline.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection("++"+nowvalue+"++");
+});
+ui.toolbar.listul.click(function (){
+    var nowvalue="";
+    nowvalue=editor.getSelection();
+    editor.replaceSelection("- "+nowvalue);
+});
+ui.toolbar.listol.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection("1. "+nowvalue);
+});
+ui.toolbar.list.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection("- [ ]"+nowvalue);
+});
+ui.toolbar.smile.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection(" :smile:");
+});
+ui.toolbar.tag.click(function (){
+    var nowvalue="";
+    var nowvalue=editor.getSelection();
+    editor.replaceSelection("###### tags: `"+nowvalue+"`");
 });
 
 // import from google drive
